@@ -1,0 +1,50 @@
+package com.abhishek.nexapay.payment.entity;
+
+import com.abhishek.nexapay.common.entity.Money;
+import com.abhishek.nexapay.common.enums.OrderStatus;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.UUID;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@Entity
+@Table(name = "order_record")
+public class OrderRecord {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    // no FK - cross-service boundary
+    @Column(name = "merchant_id", nullable = false)
+    private UUID merchantId;
+
+    @Column(length = 50)
+    private String idempotencyKey;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private OrderStatus orderStatus;
+
+    @Column(nullable = false)
+    private Integer attempts = 0;
+
+    @Embedded
+    private Money amount;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, Object> notes;
+
+    @Column(nullable = false)
+    private LocalDateTime expiresAt;
+}

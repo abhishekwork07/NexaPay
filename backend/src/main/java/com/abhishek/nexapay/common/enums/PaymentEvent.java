@@ -1,0 +1,16 @@
+package com.abhishek.nexapay.common.enums;
+
+public enum PaymentEvent {
+    AUTHORIZE_ATTEMPT,
+    AUTHORIZE_SUCCESS,
+    AUTHORIZE_FAILURE,
+    CAPTURE_REQUESTED,
+    CAPTURE_SUCCESS,
+    CAPTURE_FAILURE,
+    CAPTURE_TIMEOUT,
+    REFUND_INITIATED,
+    REFUND_COMPLETED,
+    REFUND_FAILED,
+    SETTLED,
+    CANCELLED
+}
