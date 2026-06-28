@@ -8,6 +8,7 @@ import com.abhishek.nexapay.merchant.dto.request.MerchantSignUpRequest;
 import com.abhishek.nexapay.merchant.dto.response.MerchantResponse;
 import com.abhishek.nexapay.merchant.entity.AppUser;
 import com.abhishek.nexapay.merchant.entity.Merchant;
+import com.abhishek.nexapay.merchant.mapper.MerchantMapper;
 import com.abhishek.nexapay.merchant.repo.AppUserRepository;
 import com.abhishek.nexapay.merchant.repo.MerchantRepository;
 import com.abhishek.nexapay.merchant.service.IAuthService;
@@ -24,6 +25,8 @@ public class AuthService implements IAuthService {
     private final MerchantRepository merchantRepository;
 
     private final AppUserRepository appUserRepository;
+
+    private final MerchantMapper merchantMapper;
 
 
     @Override
@@ -54,7 +57,6 @@ public class AuthService implements IAuthService {
 
         appUserRepository.save(newAppUser);
 
-        return new MerchantResponse(savedMerchant.getId(), savedMerchant.getName(), savedMerchant.getEmail(),
-                savedMerchant.getBusinessName(), savedMerchant.getBusinessType(), savedMerchant.getStatus());
+        return merchantMapper.toResponse(savedMerchant);
     }
 }
