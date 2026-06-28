@@ -16,7 +16,7 @@ public class SettlementPayment {
     private SettlementPaymentId id;
 
     @MapsId()
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "settlement_id", nullable = false)
     private Settlement settlement;
 }
