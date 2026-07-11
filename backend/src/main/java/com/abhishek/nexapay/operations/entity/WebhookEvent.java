@@ -1,5 +1,6 @@
 package com.abhishek.nexapay.operations.entity;
 
+import com.abhishek.nexapay.common.entity.BaseEntity;
 import com.abhishek.nexapay.common.enums.WebhookEventStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "webhook_event")
-public class WebhookEvent {
+public class WebhookEvent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

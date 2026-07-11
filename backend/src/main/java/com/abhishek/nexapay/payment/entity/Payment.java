@@ -1,5 +1,6 @@
 package com.abhishek.nexapay.payment.entity;
 
+import com.abhishek.nexapay.common.entity.BaseEntity;
 import com.abhishek.nexapay.common.entity.Money;
 import com.abhishek.nexapay.common.enums.PaymentMethod;
 import com.abhishek.nexapay.common.enums.PaymentStatus;
@@ -18,8 +19,12 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "payment")
-public class Payment {
+@Table(name = "payment",
+        indexes = {
+                @Index(name = "idx_payment_order_id", columnList = "order_id"),
+                @Index(name = "idx_payment_merchant_id", columnList = "merchant_id"),
+        })
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

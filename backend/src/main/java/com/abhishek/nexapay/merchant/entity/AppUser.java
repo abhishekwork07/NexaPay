@@ -1,5 +1,6 @@
 package com.abhishek.nexapay.merchant.entity;
 
+import com.abhishek.nexapay.common.entity.BaseEntity;
 import com.abhishek.nexapay.common.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,8 +13,11 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "app_user")
-public class AppUser {
+@Table(name = "app_user",
+        indexes = {
+                @Index(name = "idx_app_user_merchant_id", columnList = "merchant_id"),
+        })
+public class AppUser extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

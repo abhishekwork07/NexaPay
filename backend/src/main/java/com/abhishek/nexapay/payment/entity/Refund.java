@@ -1,5 +1,6 @@
 package com.abhishek.nexapay.payment.entity;
 
+import com.abhishek.nexapay.common.entity.BaseEntity;
 import com.abhishek.nexapay.common.entity.Money;
 import com.abhishek.nexapay.common.enums.RefundStatus;
 import jakarta.persistence.*;
@@ -17,8 +18,12 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "refund")
-public class Refund {
+@Table(name = "refund",
+        indexes = {
+                @Index(name = "idx_refund_merchant_id", columnList = "merchant_id"),
+                @Index(name = "idx_refund_payment_id", columnList = "payment_id"),
+        })
+public class Refund extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

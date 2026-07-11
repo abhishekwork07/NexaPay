@@ -1,5 +1,6 @@
 package com.abhishek.nexapay.payment.entity;
 
+import com.abhishek.nexapay.common.entity.BaseEntity;
 import com.abhishek.nexapay.common.entity.Money;
 import com.abhishek.nexapay.common.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -17,8 +18,12 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-@Table(name = "order_record")
-public class OrderRecord {
+@Table(name = "order_record",
+        indexes = {
+                @Index(name = "idx_order_id_merchant_id", columnList = "id, merchant_id"),
+                @Index(name = "idx_order_merchant_id", columnList = "merchant_id"),
+        })
+public class OrderRecord extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
