@@ -22,13 +22,16 @@ public class ApiKey {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "merchant_id", nullable = false)
-    private Merchant merchantId;
+    private Merchant merchant;
 
     @Column(nullable = false, unique = true, length = 200)
     private String keyId;
 
     @Column(nullable = false, length = 200)
     private String keySecretHash;
+
+    @Column(nullable = false, length = 200)
+    private String previousKeySecretHash;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
