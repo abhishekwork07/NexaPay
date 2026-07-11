@@ -29,13 +29,14 @@ public class OrderRecord {
     private UUID merchantId;
 
     @Column(length = 50)
-    private String idempotencyKey;
+    private String idempotencyKey; // can be known as receipt
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private OrderStatus orderStatus;
 
     @Column(nullable = false)
+    @Builder.Default
     private Integer attempts = 0;
 
     @Embedded

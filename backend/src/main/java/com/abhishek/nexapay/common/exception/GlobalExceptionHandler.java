@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 ErrorResponse.of(errorCode, ex.getMessage()));
     }
+
+    @ExceptionHandler(BusinessRuleViolationException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessRuleViolation(BusinessRuleViolationException ex) {
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(
+                ErrorResponse.of(ex.getErrorCode(), ex.getMessage()));
+    }
  }

@@ -5,7 +5,7 @@ import com.abhishek.nexapay.merchant.dto.response.ApiKeyCreateResponse;
 import com.abhishek.nexapay.merchant.dto.response.ApiKeyResponse;
 import com.abhishek.nexapay.merchant.service.IApiKeyService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/merchant/{merchantId}/api-key")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ApiKeyController {
 
     private final IApiKeyService apiKeyService;

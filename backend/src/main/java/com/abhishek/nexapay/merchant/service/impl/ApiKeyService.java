@@ -75,6 +75,8 @@ public class ApiKeyService implements IApiKeyService {
     public ApiKeyCreateResponse rotateApiKey(UUID merchantId, UUID keyId) {
         ApiKey apiKey = validateAndGetApiKey(merchantId, keyId);
 
+        if(!apiKey.isEnabled()) throw new RuntimeException("Can't rotate a disabled key!");
+
         String newRawSecret = RandomizerUtil.randomBase64(40);
         apiKey.setPreviousKeySecretHash(apiKey.getKeySecretHash());
         apiKey.setKeySecretHash(newRawSecret);
